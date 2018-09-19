@@ -14,7 +14,7 @@ class App extends Component {
     return (
       <div className="App">
         <nav>
-          <Link to='/articles'>Home</Link>
+          <Link to='/'>Home</Link>
           <Link to='/profile'>Profile</Link>
           <Link to='./newArticle'>Write new article</Link>
         </nav>
@@ -25,7 +25,7 @@ class App extends Component {
         </nav>
 
 
-        <Route exact path='/articles' render={(props) => <Articles
+        <Route exact path='/' render={(props) => <Articles
           {...props}
         />}
         />

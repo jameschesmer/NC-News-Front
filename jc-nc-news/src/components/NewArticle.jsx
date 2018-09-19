@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import * as api from './api'
 
 class NewArticle extends Component {
@@ -6,7 +7,8 @@ class NewArticle extends Component {
     title: '',
     content: '',
     topic: 'Coding',
-    user_id: ''
+    user_id: '',
+    addedArticle: false
   }
 
   componentDidMount = async () => {
@@ -17,6 +19,7 @@ class NewArticle extends Component {
   }
 
   render() {
+    if (this.state.addedArticle) return <Redirect to="/" />
     return (
       <form onSubmit={this.handleSubmit}>
         <p>Title</p>
@@ -47,9 +50,12 @@ class NewArticle extends Component {
     this.setState({ title: event.target.value });
   }
 
-  handleSubmit = (event) => {
-    event.preventDefault()
-    api.addNewArticle(this.state)
+  handleSubmit = async (event) => {
+    event.preventDefault();
+    await api.addNewArticle(this.state);
+    this.setState({
+      addedArticle: true
+    })
   }
 }
 
