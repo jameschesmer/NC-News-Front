@@ -30,9 +30,13 @@ export const retriveCommentsByArticle = (props) => {
 }
 
 export const updateVotesComment = (props, query) => {
-  console.log(props, query)
   query = query.toLowerCase()
   axios.patch(`${DB_URL}/comments/${props}?vote=${query}`)
+}
+
+export const updateVotesArticle = (props, query) => {
+  query = query.toLowerCase()
+  axios.patch(`${DB_URL}/articles/${props}?vote=${query}`)
 }
 
 export const addNewArticle = (props) => {

@@ -40,12 +40,10 @@ class NewArticle extends Component {
   }
 
   handleInput = (event) => {
-    console.log(event.target.value)
     this.setState({ content: event.target.value });
   }
 
   handleTitle = (event) => {
-    console.log(event.target.value)
     this.setState({ title: event.target.value });
   }
 
