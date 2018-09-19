@@ -34,3 +34,9 @@ export const updateVotesComment = (props, query) => {
   query = query.toLowerCase()
   axios.patch(`${DB_URL}/comments/${props}?vote=${query}`)
 }
+
+export const addNewArticle = (props) => {
+  axios.post(`${DB_URL}/topics/${props.topic}/articles`, {
+    "title": `${props.title}`, "body": `${props.content}`, "created_by": `${props.user_id}`
+  })
+}

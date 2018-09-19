@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
+import * as api from './api'
 
 class NewArticle extends Component {
   state = {
     title: '',
     content: '',
-    topic: 'Coding'
+    topic: 'Coding',
+    user_id: ''
   }
+
+  componentDidMount = async () => {
+    const user = await api.retriveProfile(this.props)
+    this.setState({
+      user_id: user.data.user._id,
+    });
+  }
+
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
@@ -41,7 +51,7 @@ class NewArticle extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    ///handle by api
+    api.addNewArticle(this.state)
   }
 }
 

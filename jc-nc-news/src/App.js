@@ -40,7 +40,7 @@ class App extends Component {
           {...props} />}
         />
         <Route exact path='/newArticle' render={(props) => <NewArticle
-          {...props} />}
+          {...this.state} />}
         />
       </div>
     );
