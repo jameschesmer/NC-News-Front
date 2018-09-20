@@ -44,7 +44,7 @@ class App extends Component {
           {...props} />}
         />
         <Route exact path='/articles/:article_id' render={(props) => <Article
-          {...props} />}
+          {...props} {...this.state} />}
         />
         <Route exact path='/newArticle' render={(props) => <NewArticle
           {...this.state} />}
