@@ -1,0 +1,63 @@
+.App {
+  text-align: center;
+}
+
+nav {
+  background-color: blue;
+  font-size: 30px;
+  height: 50px;
+  align-content: center;
+  text-justify: center;
+}
+
+a {
+  text-decoration: none white solid;
+  padding: 5px;
+  margin: 5px;
+  align-self: center;
+}
+
+nav > a:visited { text-decoration: none; color:white; }
+
+.dropdown {
+  float: right;
+  overflow: hidden;
+  padding: 0px 10px;
+  margin: 0px 10px;
+}
+
+.dropdown .dropbtn {
+  font-size: 18px; 
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+}
+
+.content {
+  display: none;
+  position: absolute;
+  color: white;
+  background-color: blue;
+  min-width: 160px;
+  z-index: 1;
+  padding: 0px 10px;
+  margin: 0px 10px;
+}
+
+.content > a {
+  color: white;
+  padding: 0px 10px;
+  margin: 0px 10px;
+}
+
+.content a:hover {
+  background-color:lightblue;
+}
+
+.dropdown:hover .content {
+  display: block;
+  margin: 2px;
+  padding: 2px;
+}

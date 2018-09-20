@@ -4,18 +4,14 @@ import * as api from './api'
 class Profile extends Component {
   state = {
     user: '',
-    avatar: '',
-    articles: []
+    avatar: ''
   }
 
   componentDidMount = async () => {
     const user = await api.retriveProfile(this.props)
-    // const articles = await api.retriveArticlesByUser()
-    console.log(user.data.user)
     this.setState({
       user: user.data.user.name,
       avatar: user.data.user.avatar_url
-      // articles: articles.data.articles
     });
   }
 

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from './api'
+import '../CSS/Article.css'
 
 class Article extends Component {
   state = {
@@ -41,8 +42,8 @@ class Article extends Component {
             <h2>{this.state.article[0].title}</h2>
             <p>{this.state.article[0].belongs_to}: {this.state.article[0].body}</p>
             <p>Votes: {this.state.article[0].votes}</p>
-            <div>Comments: {this.state.comments.map(comment => {
-              return <div key={comment._id}>
+            <div className='articlePage'>Comments: {this.state.comments.map(comment => {
+              return <div className='comment' key={comment._id}>
                 <p>Comment: {comment.body}</p>
                 <p>Date: {comment.created_at}</p>
                 <p>Votes: {comment.votes}</p>

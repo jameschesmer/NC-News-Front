@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import './App.css';
+import PropTypes from 'prop-types'
 import Articles from './components/Articles'
 import Profile from './components/Profile'
 import Article from './components/Article'
 import NewArticle from './components/NewArticle'
+import './CSS/App.css'
 
 class App extends Component {
   state = {
@@ -13,16 +14,22 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <nav>
+        <nav className='topBar'>
           <Link to='/'>Home</Link>
           <Link to='/profile'>Profile</Link>
-          <Link to='./newArticle'>Write new article</Link>
+          <Link to='/newArticle'>New article</Link>
+          <div className="dropdown">
+            <button className="dropbtn">Select Topic</button>
+            <div className='content'>
+              <Link to='/topics/Coding/articles'>Coding</Link>
+              <br />
+              <Link to='/topics/Football/articles'>Football</Link>
+              <br />
+              <Link to='/topics/Cooking/articles'>Cooking</Link>
+            </div>
+          </div>
         </nav>
-        <nav>
-          <Link to='/topics/Coding/articles'>Coding</Link>
-          <Link to='/topics/Football/articles'>Football</Link>
-          <Link to='/topics/Cooking/articles'>Cooking</Link>
-        </nav>
+
 
 
         <Route exact path='/' render={(props) => <Articles

@@ -1,0 +1,13 @@
+.articlePage{
+  justify-items: center;
+  align-items: center;
+}
+
+.comment {
+  border: solid black;
+  border-radius: 25px;
+  width: 80%;
+  padding: 5px;
+  margin: 5px;
+  background-color: rgb(200, 241, 255);
+}

@@ -13,14 +13,6 @@ export const retriveArticleById = (props) => {
   return axios.get(`${DB_URL}/articles/${props.article_id}`)
 }
 
-// export const retriveArticlesByUser = (props) => {
-//   if (props.topic_slug) {
-//     return axios.get(`${DB_URL}/topics/${props.topic_slug}/articles`)
-//   } else {
-//     return axios.get(`${DB_URL}/articles`)
-//   }
-// }
-
 export const retriveProfile = (props) => {
   return axios.get(`${DB_URL}/users/${props.currentUser}`)
 }
