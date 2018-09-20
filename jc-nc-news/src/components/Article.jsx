@@ -50,7 +50,13 @@ class Article extends Component {
                 <p>Posted: {moment(comment.created_at).fromNow()}</p>
                 <p>Votes: {comment.votes}</p>
                 <p>Created by: {comment.created_by}</p>
-                <button onClick={this.handleClick} value={comment._id}>Up</button><button onClick={this.handleClick} value={comment._id}>Down</button>
+                <div >
+                  <button onClick={this.handleClick} value={comment._id}>Up</button>
+                  <button onClick={this.handleClick} value={comment._id}>Down</button>
+                  {console.log(comment.created_by)}
+                  {/* disabled={this.props.currentUser !== comment.created_by} */}
+                  <button className='DeleteArticle' onClick={() => this.handleDelete(comment._id)}>Delete</button>
+                </div>
               </div>
             })}</div>
           </div>
@@ -93,6 +99,14 @@ class Article extends Component {
   sortComments = (comments) => {
     return comments.data.comments.sort((a, b) => {
       return moment(b.created_at).valueOf() - moment(a.created_at).valueOf()
+    })
+  }
+
+  handleDelete = async (commentId) => {
+    await api.deleteComment(commentId)
+    const newcomments = this.state.comments.filter(comment => comment._id !== commentId)
+    this.setState({
+      comments: newcomments
     })
   }
 }

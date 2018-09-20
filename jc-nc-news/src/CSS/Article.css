@@ -57,3 +57,9 @@ border: solid black;
   color: black;
   opacity: 0.5;
 }
+
+.DeleteComment {
+  border: solid red 3px;
+  justify-items: right;
+  margin: 5px;
+}

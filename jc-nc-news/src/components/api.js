@@ -42,3 +42,7 @@ export const addNewComment = (newComment, articleId, userId) => {
     "body": `${newComment}`, "created_by": `${userId}`
   })
 }
+
+export const deleteComment = (commentId) => {
+  return axios.delete(`${DB_URL}/comments/${commentId}`)
+}
