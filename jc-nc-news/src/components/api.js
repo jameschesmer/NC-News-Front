@@ -37,8 +37,8 @@ export const addNewArticle = (props) => {
   })
 }
 
-export const addNewComment = (props, id, userId) => {
-  axios.post(`${DB_URL}/articles/${id}/comments`, {
-    "body": `${props}`, "created_by": `${userId}`
+export const addNewComment = (newComment, articleId, userId) => {
+  return axios.post(`${DB_URL}/articles/${articleId}/comments`, {
+    "body": `${newComment}`, "created_by": `${userId}`
   })
 }

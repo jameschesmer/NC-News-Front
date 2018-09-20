@@ -34,6 +34,12 @@ border: solid black;
   opacity: 1;
 }
 
+.UPVoteButton:disabled{
+  background-color: grey;
+  color: black;
+  opacity: 0.5;
+}
+
 .DOWNVoteButton {
   background-color: red;
   height: 100%;
@@ -44,4 +50,10 @@ border: solid black;
 
 .DOWNVoteButton:hover{
   opacity: 1;
+}
+
+.DOWNVoteButton:disabled{
+  background-color: grey;
+  color: black;
+  opacity: 0.5;
 }

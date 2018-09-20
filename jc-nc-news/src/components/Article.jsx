@@ -8,37 +8,20 @@ class Article extends Component {
     article: [],
     comments: [],
     newComment: '',
-    currentUser: ''
+    changeArticleVotes: 0
   }
 
   componentDidMount() {
-    this.retriveArticles()
-    this.retriveComments()
-
-    this.setState({
-      currentUser: this.props.currentUser
-    })
+    this.retriveArticleAndComments()
   }
 
-  componentDidUpdate(prevProps, prevState) {
-    if (this.state !== prevState) {
-      this.retriveArticles()
-      this.retriveComments()
-    }
-  }
-
-  retriveArticles = async () => {
+  retriveArticleAndComments = async () => {
     const article = await api.retriveArticleById(this.props.match.params)
-    this.setState({
-      article: [article.data.articles]
-    });
-  }
-
-  retriveComments = async () => {
     const comments = await api.retriveCommentsByArticle(this.props.match.params)
-    this.sortComments(comments)
+    let sortedComments = this.sortComments(comments)
     this.setState({
-      comments: comments.data.comments
+      article: [article.data.articles],
+      comments: sortedComments
     });
   }
 
@@ -50,9 +33,9 @@ class Article extends Component {
             <div className='thisArticle'>
               <h2>{this.state.article[0].title}</h2>
               <p>{this.state.article[0].belongs_to}: {this.state.article[0].body}</p>
-              <p>Votes: {this.state.article[0].votes}</p>
-              <button className='UPVoteButton' key={`${this.state.article[0]._id}UP`} onClick={this.handleVoteClick} value={this.state.article[0]._id}>Up</button>
-              <button className='DOWNVoteButton' key={`${this.state.article[0]._id}DOWN`} onClick={this.handleVoteClick} value={this.state.article[0]._id}>Down</button>
+              <p>Votes: {this.state.article[0].votes + this.state.changeArticleVotes}</p>
+              <button disabled={this.state.changeArticleVotes !== 0} className='UPVoteButton' key={`${this.state.article[0]._id}UP`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'UP')}>Up</button>
+              <button disabled={this.state.changeArticleVotes !== 0} className='DOWNVoteButton' key={`${this.state.article[0]._id}DOWN`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'DOWN')}>Down</button>
             </div>
 
             <p>Add Comment: </p>
@@ -80,8 +63,12 @@ class Article extends Component {
     await api.updateVotesComment(e.target.value, e.target.innerText)
   }
 
-  handleVoteClick = async (e) => {
-    await api.updateVotesArticle(e.target.value, e.target.innerText)
+  handleVoteClick = (id, direction) => {
+    api.updateVotesArticle(id, direction)
+    let vote = direction === 'UP' ? 1 : direction === 'DOWN' ? -1 : 0
+    this.setState({
+      changeArticleVotes: vote
+    })
   }
 
   handleInput = (event) => {
@@ -89,12 +76,14 @@ class Article extends Component {
   }
 
   handleSubmit = async (event) => {
-    event.preventDefault(this.state);
+    event.preventDefault();
     if (this.state.newComment !== '') {
-      const user = await api.retriveProfile(this.state)
-      await api.addNewComment(this.state.newComment, this.state.article[0]._id, user.data.user._id);
+      const user = await api.retriveProfile(this.props)
+      const latestComment = await api.addNewComment(this.state.newComment, this.state.article[0]._id, user.data.user._id);
+      const updatedComments = [latestComment.data.comment].concat(this.state.comments);
       this.setState({
-        newComment: ''
+        newComment: '',
+        comments: updatedComments
       })
     } else {
       alert('Cannot enter an empty comment...')

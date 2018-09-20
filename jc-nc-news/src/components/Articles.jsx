@@ -40,15 +40,15 @@ class Articles extends Component {
               <p>Comments: {article.comment_count}</p>
             </Link>
             </button>
-            <button className='UPButton' key={`${article._id}UP`} onClick={this.handleClick} value={article._id}>Up</button>
-            <button className='DOWNButton' key={`${article._id}DOWN`} onClick={this.handleClick} value={article._id}>Down</button></div>
+            <button className='UPButton' key={`${article._id}UP`} onClick={() => this.handleClick(article._id, 'UP')}>Up</button>
+            <button className='DOWNButton' key={`${article._id}DOWN`} onClick={() => this.handleClick(article._id, 'DOWN')} >Down</button></div>
         })}
       </div >
     );
   }
 
-  handleClick = async (e) => {
-    await api.updateVotesArticle(e.target.value, e.target.innerText)
+  handleClick = (id, direction) => {
+    api.updateVotesArticle(id, direction)
   }
 
   sortArticles = (articles) => {
