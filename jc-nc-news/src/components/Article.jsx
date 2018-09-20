@@ -14,6 +14,7 @@ class Article extends Component {
   componentDidMount() {
     this.retriveArticles()
     this.retriveComments()
+
     this.setState({
       currentUser: this.props.currentUser
     })
@@ -35,6 +36,7 @@ class Article extends Component {
 
   retriveComments = async () => {
     const comments = await api.retriveCommentsByArticle(this.props.match.params)
+    this.sortComments(comments)
     this.setState({
       comments: comments.data.comments
     });
@@ -49,6 +51,8 @@ class Article extends Component {
               <h2>{this.state.article[0].title}</h2>
               <p>{this.state.article[0].belongs_to}: {this.state.article[0].body}</p>
               <p>Votes: {this.state.article[0].votes}</p>
+              <button className='UPVoteButton' key={`${this.state.article[0]._id}UP`} onClick={this.handleVoteClick} value={this.state.article[0]._id}>Up</button>
+              <button className='DOWNVoteButton' key={`${this.state.article[0]._id}DOWN`} onClick={this.handleVoteClick} value={this.state.article[0]._id}>Down</button>
             </div>
 
             <p>Add Comment: </p>
@@ -76,6 +80,10 @@ class Article extends Component {
     await api.updateVotesComment(e.target.value, e.target.innerText)
   }
 
+  handleVoteClick = async (e) => {
+    await api.updateVotesArticle(e.target.value, e.target.innerText)
+  }
+
   handleInput = (event) => {
     this.setState({ newComment: event.target.value });
   }
@@ -91,7 +99,12 @@ class Article extends Component {
     } else {
       alert('Cannot enter an empty comment...')
     }
+  }
 
+  sortComments = (comments) => {
+    return comments.data.comments.sort((a, b) => {
+      return moment(b.created_at).valueOf() - moment(a.created_at).valueOf()
+    })
   }
 }
 

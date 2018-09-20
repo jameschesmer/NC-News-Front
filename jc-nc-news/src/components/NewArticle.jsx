@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import * as api from './api'
+import PropTypes from 'prop-types'
 
 class NewArticle extends Component {
   state = {
@@ -57,6 +58,10 @@ class NewArticle extends Component {
       addedArticle: true
     })
   }
+}
+
+NewArticle.propTypes = {
+  currentUser: PropTypes.string.isRequired
 }
 
 export default NewArticle;

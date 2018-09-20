@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import PropTypes from 'prop-types'
 import Articles from './components/Articles'
 import Profile from './components/Profile'
 import Article from './components/Article'

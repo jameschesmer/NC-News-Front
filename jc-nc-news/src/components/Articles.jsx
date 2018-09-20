@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from './api'
 import { Link } from 'react-router-dom';
 import '../CSS/Articles.css'
+import moment from 'moment'
 
 class Articles extends Component {
   state = {
@@ -20,6 +21,7 @@ class Articles extends Component {
 
   retriveArticles = async () => {
     const articles = await api.retriveArticlesByTopicSlug(this.props.match.params)
+    this.sortArticles(articles)
     this.setState({
       articles: articles.data.articles
     });
@@ -40,7 +42,6 @@ class Articles extends Component {
             </button>
             <button className='UPButton' key={`${article._id}UP`} onClick={this.handleClick} value={article._id}>Up</button>
             <button className='DOWNButton' key={`${article._id}DOWN`} onClick={this.handleClick} value={article._id}>Down</button></div>
-
         })}
       </div >
     );
@@ -48,6 +49,12 @@ class Articles extends Component {
 
   handleClick = async (e) => {
     await api.updateVotesArticle(e.target.value, e.target.innerText)
+  }
+
+  sortArticles = (articles) => {
+    return articles.data.articles.sort((a, b) => {
+      return moment(b.created_at).valueOf() - moment(a.created_at).valueOf()
+    })
   }
 }
 

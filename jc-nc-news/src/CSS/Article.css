@@ -21,3 +21,27 @@ border: solid black;
   margin: 5px 10%;
   background-color: rgb(200, 241, 255);
 }
+
+.UPVoteButton {
+  background-color: green;
+  height: 100%;
+  width: 50px;
+  border: black;
+  opacity: 0.2;
+}
+
+.UPVoteButton:hover{
+  opacity: 1;
+}
+
+.DOWNVoteButton {
+  background-color: red;
+  height: 100%;
+  width: 50px;
+  border: black;
+  opacity: 0.2;
+}
+
+.DOWNVoteButton:hover{
+  opacity: 1;
+}

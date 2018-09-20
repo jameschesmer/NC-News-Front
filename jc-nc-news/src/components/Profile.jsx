@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as api from './api'
+import PropTypes from 'prop-types'
 
 class Profile extends Component {
   state = {
@@ -25,4 +26,7 @@ class Profile extends Component {
   }
 }
 
+Profile.propTypes = {
+  currentUser: PropTypes.string.isRequired
+}
 export default Profile;
