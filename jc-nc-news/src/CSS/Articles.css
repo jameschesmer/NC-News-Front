@@ -1,6 +1,7 @@
 .outerArticleContainer {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
 }
 
 .articleContainer{

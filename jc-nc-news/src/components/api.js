@@ -17,6 +17,10 @@ export const retriveProfile = (props) => {
   return axios.get(`${DB_URL}/users/${props.currentUser}`)
 }
 
+export const retriveUsers = () => {
+  return axios.get(`${DB_URL}/users`)
+}
+
 export const retriveCommentsByArticle = (props) => {
   return axios.get(`${DB_URL}/articles/${props.article_id}/comments`)
 }
