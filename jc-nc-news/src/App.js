@@ -9,7 +9,8 @@ import Login from './components/Login';
 
 class App extends Component {
   state = {
-    currentUser: ''
+    currentUser: 'jessjelly',
+    user: 'Jess Jelly'
   }
   render() {
     return (

@@ -18,12 +18,20 @@ class Article extends Component {
 
   retriveArticleAndComments = async () => {
     const article = await api.retriveArticleById(this.props.match.params)
+    console.log(article)
     const comments = await api.retriveCommentsByArticle(this.props.match.params)
-    let sortedComments = this.sortComments(comments)
-    this.setState({
-      article: [article.data.articles],
-      comments: sortedComments
-    });
+    console.log(comments.status)
+    if (comments.status === 200) {
+      let sortedComments = this.sortComments(comments)
+      this.setState({
+        article: [article.data.articles],
+        comments: sortedComments
+      });
+    } else {
+      this.setState({
+        article: [article.data.articles]
+      });
+    }
   }
 
   render() {
@@ -33,6 +41,7 @@ class Article extends Component {
           <div>
             <div className='thisArticle'>
               <h2>{this.state.article[0].title}</h2>
+              <p>{this.state.article[0].created_by.name}</p>
               <p>{this.state.article[0].belongs_to}: {this.state.article[0].body}</p>
               <p>Votes: {this.state.article[0].votes + this.state.changeArticleVotes}</p>
               <button disabled={this.state.changeArticleVotes !== 0} className='UPVoteButton' key={`${this.state.article[0]._id}UP`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'UP')}>Up</button>
@@ -44,11 +53,11 @@ class Article extends Component {
               <br />
               <button>Post</button>
             </form>
-            <div className='articlePage'>Comments:
+            {this.state.comments.length > 0 && <div className='articlePage'>Comments:
                 {this.state.comments.map(comment => {
-                return <Comment key={comment._id} comment={comment} handleDelete={this.handleDelete} article_id={this.state.article[0]._id} />
+                return <Comment key={comment._id} comment={comment} handleDelete={this.handleDelete} article_id={this.state.article[0]._id} currentUser={this.props.currentUser} name={this.props.user} />
               })}
-            </div>
+            </div>}
           </div>
         }
       </div>

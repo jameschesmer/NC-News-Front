@@ -1,6 +1,16 @@
 import axios from 'axios'
 const DB_URL = 'https://northcoders-news-jwrc.herokuapp.com/api'
 
+const withErrorHandling = (func) => {
+  return ((...args) => {
+    console.log('here')
+    console.log(...args, '<<<')
+    console.log(func)
+    return func(...args).catch(err => console.log('I have an error'))
+  })
+}
+
+
 export const retriveArticlesByTopicSlug = (props) => {
   if (props.topic_slug) {
     return axios.get(`${DB_URL}/topics/${props.topic_slug}/articles`)
@@ -17,9 +27,9 @@ export const retriveProfile = (props) => {
   return axios.get(`${DB_URL}/users/${props.currentUser}`)
 }
 
-export const retriveUsers = () => {
-  return axios.get(`${DB_URL}/users`)
-}
+export const retriveUsers = withErrorHandling(() => {
+  return axios.get(`${DB_URL}/users`);
+})
 
 export const retriveCommentsByArticle = (props) => {
   return axios.get(`${DB_URL}/articles/${props.article_id}/comments`)
