@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import * as api from './api'
+import '../CSS/Login.css'
 
 class Login extends Component {
   state = {
@@ -8,9 +10,13 @@ class Login extends Component {
 
   componentDidMount = async () => {
     const users = await api.retriveUsers()
-    this.setState({
-      users: users.data.users
-    })
+    if (users.status === 200) {
+      this.setState({
+        users: users.data.users
+      })
+    } else {
+      return (<Redirect to="/Page404" />)
+    }
   }
 
   render() {
@@ -20,8 +26,9 @@ class Login extends Component {
         {(this.state.users.length > 0) &&
           (<div>
             {this.state.users.map(user => {
-              return <button key={user._id} onClick={() => this.props.updateUser(user.username)}>
-                <img src={`${user.avatar_url}`} alt="" />
+              return <button className='loginButton' key={user._id} onClick={() => this.props.updateUser(user.username, user.name)}>
+                <img src={`${user.avatar_url}`} alt={`${user.name}`} onError={(e) => { e.target.src = "https://static.boredpanda.com/blog/wp-content/uploads/2017/09/funny-dog-thoughts-tweets-1.jpg" }}
+                />
                 <h1>{user.name}</h1>
               </button>
             })}

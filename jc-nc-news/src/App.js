@@ -6,12 +6,15 @@ import Article from './components/Article'
 import NewArticle from './components/NewArticle'
 import './CSS/App.css'
 import Login from './components/Login';
+import Page404 from './components/Page404';
 
 class App extends Component {
   state = {
-    currentUser: 'jessjelly',
-    user: 'Jess Jelly'
+    currentUser: '',
+    user: ''
   }
+  // jessjelly
+  // Jess Jelly
   render() {
     return (
       <div className="App">
@@ -51,7 +54,10 @@ class App extends Component {
             <Route exact path='/newArticle' render={(props) => <NewArticle
               {...this.state} />}
             />
-          </div> : <Route exact path='/' render={(props) => <Login
+            <Route exact path='/Page404' render={() => < Page404
+            />}
+            />
+          </div> : <Route path='/' render={(props) => <Login
             {...props} updateUser={this.updateUser}
           />}
           />
@@ -60,9 +66,10 @@ class App extends Component {
     );
   }
 
-  updateUser = (username) => {
+  updateUser = (username, user) => {
     this.setState({
-      currentUser: username
+      currentUser: username,
+      user: user
     })
   }
 }

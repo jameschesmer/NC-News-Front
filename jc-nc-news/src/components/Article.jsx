@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Redirect } from 'react-router-dom';
 import * as api from './api'
 import '../CSS/Article.css'
 import moment from 'moment'
@@ -18,19 +19,21 @@ class Article extends Component {
 
   retriveArticleAndComments = async () => {
     const article = await api.retriveArticleById(this.props.match.params)
-    console.log(article)
-    const comments = await api.retriveCommentsByArticle(this.props.match.params)
-    console.log(comments.status)
-    if (comments.status === 200) {
-      let sortedComments = this.sortComments(comments)
-      this.setState({
-        article: [article.data.articles],
-        comments: sortedComments
-      });
+    if (article.status === 200) {
+      const comments = await api.retriveCommentsByArticle(this.props.match.params)
+      if (comments.status === 200) {
+        let sortedComments = this.sortComments(comments)
+        this.setState({
+          article: [article.data.articles],
+          comments: sortedComments
+        });
+      } else {
+        this.setState({
+          article: [article.data.articles]
+        });
+      }
     } else {
-      this.setState({
-        article: [article.data.articles]
-      });
+      return (<Redirect to="/Page404" />)
     }
   }
 

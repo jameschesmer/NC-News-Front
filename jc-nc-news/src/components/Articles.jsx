@@ -3,6 +3,7 @@ import * as api from './api'
 import { Link } from 'react-router-dom';
 import '../CSS/Articles.css'
 import moment from 'moment'
+import Votes from './Votes';
 
 class Articles extends Component {
   state = {
@@ -11,12 +12,6 @@ class Articles extends Component {
 
   componentDidMount() {
     this.retriveArticles()
-  }
-
-  componentDidUpdate(prevProps, prevState) {
-    if (this.props !== prevProps) {
-      this.retriveArticles()
-    }
   }
 
   retriveArticles = async () => {
@@ -36,7 +31,7 @@ class Articles extends Component {
             <button className='articleButton' key={article._id}  ><Link to={`/articles/${article._id}`} key={article._id} >
               <h2>{article.title}</h2>
               <p>{article.belongs_to}: {article.body.slice(0, 45)}...</p>
-              <p>Votes: {article.votes}</p>
+              <Votes votes={article.votes} />
               <p>Comments: {article.comment_count}</p>
             </Link>
             </button>
