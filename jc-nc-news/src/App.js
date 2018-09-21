@@ -29,8 +29,6 @@ class App extends Component {
           </div>
         </nav>
 
-
-
         <Route exact path='/' render={(props) => <Articles
           {...props}
         />}

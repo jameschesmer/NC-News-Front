@@ -1,0 +1,8 @@
+.NewArticleForm{
+  background-color: rgb(200, 255, 214);
+  border: solid black 3px;
+  width: 50%;
+  height: 800px;
+  border-radius: 25px;
+  margin: 10px 25%;
+}

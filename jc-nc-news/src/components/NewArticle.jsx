@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom';
 import * as api from './api'
 import PropTypes from 'prop-types'
+import '../CSS/NewArticle.css'
 
 class NewArticle extends Component {
   state = {
@@ -22,17 +23,17 @@ class NewArticle extends Component {
   render() {
     if (this.state.addedArticle) return <Redirect to="/" />
     return (
-      <form onSubmit={this.handleSubmit}>
-        <p>Title</p>
+      <form className='NewArticleForm' onSubmit={this.handleSubmit}>
+        <h1>Title</h1>
         <input type="text" value={this.state.title} onChange={this.handleTitle} />
-        <p>Topic</p>
+        <h2>Choose a topic:</h2>
         <select value={this.state.topic} onChange={this.handleChange}>
           <option value="Coding">Coding</option>
           <option value="Football">Football</option>
           <option value="Cooking">Cooking</option>
         </select>
-        <p>Your article: </p>
-        <input type="text" value={this.state.content} onChange={this.handleInput} />
+        <h3>Your article: </h3>
+        <textarea rows='5' value={this.state.content} onChange={this.handleInput} />
         <p>Finished?</p>
         <button>Submit</button>
       </form>
