@@ -10,7 +10,8 @@ class Article extends Component {
     article: [],
     comments: [],
     newComment: '',
-    changeArticleVotes: 0
+    changeArticleVotes: 0,
+    err: null
   }
 
   componentDidMount() {
@@ -33,37 +34,40 @@ class Article extends Component {
         });
       }
     } else {
-      return (<Redirect to="/Page404" />)
+      this.setState({
+        err: true
+      })
     }
   }
 
   render() {
     return (
-      <div>
-        {this.state.article.length > 0 &&
-          <div>
-            <div className='thisArticle'>
-              <h2>{this.state.article[0].title}</h2>
-              <p>{this.state.article[0].created_by.name}</p>
-              <p>{this.state.article[0].belongs_to}: {this.state.article[0].body}</p>
-              <p>Votes: {this.state.article[0].votes + this.state.changeArticleVotes}</p>
-              <button disabled={this.state.changeArticleVotes !== 0} className='UPVoteButton' key={`${this.state.article[0]._id}UP`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'UP')}>Up</button>
-              <button disabled={this.state.changeArticleVotes !== 0} className='DOWNVoteButton' key={`${this.state.article[0]._id}DOWN`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'DOWN')}>Down</button>
-            </div>
-            <p>Add Comment: </p>
-            <form onSubmit={this.handleSubmit}>
-              <textarea rows='5' value={this.state.newComment} onChange={this.handleInput} />
-              <br />
-              <button>Post</button>
-            </form>
-            {this.state.comments.length > 0 && <div className='articlePage'>Comments:
+      (this.state.err !== null) ? <Redirect to="/Page404" /> :
+        <div>
+          {this.state.article.length > 0 &&
+            <div>
+              <div className='thisArticle'>
+                <h2>{this.state.article[0].title}</h2>
+                <p>{this.state.article[0].created_by.name}</p>
+                <p>{this.state.article[0].belongs_to}: {this.state.article[0].body}</p>
+                <p>Votes: {this.state.article[0].votes + this.state.changeArticleVotes}</p>
+                <button disabled={this.state.changeArticleVotes !== 0} className='UPVoteButton' key={`${this.state.article[0]._id}UP`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'UP')}>Up</button>
+                <button disabled={this.state.changeArticleVotes !== 0} className='DOWNVoteButton' key={`${this.state.article[0]._id}DOWN`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'DOWN')}>Down</button>
+              </div>
+              <p>Add Comment: </p>
+              <form onSubmit={this.handleSubmit}>
+                <textarea rows='5' value={this.state.newComment} onChange={this.handleInput} />
+                <br />
+                <button>Post</button>
+              </form>
+              {this.state.comments.length > 0 && <div className='articlePage'>Comments:
                 {this.state.comments.map(comment => {
-                return <Comment key={comment._id} comment={comment} handleDelete={this.handleDelete} article_id={this.state.article[0]._id} currentUser={this.props.currentUser} name={this.props.user} />
-              })}
-            </div>}
-          </div>
-        }
-      </div>
+                  return <Comment key={comment._id} comment={comment} handleDelete={this.handleDelete} article_id={this.state.article[0]._id} currentUser={this.props.currentUser} name={this.props.user} />
+                })}
+              </div>}
+            </div>
+          }
+        </div>
     )
   }
 

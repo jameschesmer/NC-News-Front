@@ -32,15 +32,15 @@ export const retriveCommentsByArticle = withErrorHandling((props) => {
   return axios.get(`${DB_URL}/articles/${props.article_id}/comments`)
 })
 
-export const updateVotesComment = withErrorHandling((props, query) => {
+export const updateVotesComment = (props, query) => {
   query = query.toLowerCase()
   axios.patch(`${DB_URL}/comments/${props}?vote=${query}`)
-})
+}
 
-export const updateVotesArticle = withErrorHandling((props, query) => {
+export const updateVotesArticle = (props, query) => {
   query = query.toLowerCase()
   axios.patch(`${DB_URL}/articles/${props}?vote=${query}`)
-})
+}
 
 export const addNewArticle = withErrorHandling((props) => {
   axios.post(`${DB_URL}/topics/${props.topic}/articles`, {
