@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import * as api from './api'
 import '../CSS/Article.css'
 import moment from 'moment'
+import Comment from './Comment'
 
 class Article extends Component {
   state = {
@@ -37,36 +38,21 @@ class Article extends Component {
               <button disabled={this.state.changeArticleVotes !== 0} className='UPVoteButton' key={`${this.state.article[0]._id}UP`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'UP')}>Up</button>
               <button disabled={this.state.changeArticleVotes !== 0} className='DOWNVoteButton' key={`${this.state.article[0]._id}DOWN`} onClick={() => this.handleVoteClick(this.state.article[0]._id, 'DOWN')}>Down</button>
             </div>
-
             <p>Add Comment: </p>
             <form onSubmit={this.handleSubmit}>
               <textarea rows='5' value={this.state.newComment} onChange={this.handleInput} />
               <br />
               <button>Post</button>
             </form>
-            <div className='articlePage'>Comments: {this.state.comments.map(comment => {
-              return <div className='comment' key={comment._id}>
-                <p>Comment: {comment.body}</p>
-                <p>Posted: {moment(comment.created_at).fromNow()}</p>
-                <p>Votes: {comment.votes}</p>
-                <p>Created by: {comment.created_by}</p>
-                <div >
-                  <button onClick={this.handleClick} value={comment._id}>Up</button>
-                  <button onClick={this.handleClick} value={comment._id}>Down</button>
-                  {console.log(comment.created_by)}
-                  {/* disabled={this.props.currentUser !== comment.created_by} */}
-                  <button className='DeleteArticle' onClick={() => this.handleDelete(comment._id)}>Delete</button>
-                </div>
-              </div>
-            })}</div>
+            <div className='articlePage'>Comments:
+                {this.state.comments.map(comment => {
+                return <Comment key={comment._id} comment={comment} handleDelete={this.handleDelete} article_id={this.state.article[0]._id} />
+              })}
+            </div>
           </div>
         }
       </div>
-    );
-  }
-
-  handleClick = async (e) => {
-    await api.updateVotesComment(e.target.value, e.target.innerText)
+    )
   }
 
   handleVoteClick = (id, direction) => {
