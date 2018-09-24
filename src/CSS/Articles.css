@@ -7,7 +7,7 @@
 .articleContainer{
    display: grid;
    grid-template-columns: 1fr 1fr;
-   grid-template-rows: 200px 64px;
+   grid-template-rows: 200px 71px;
    margin: 2px;
    padding: 2px 2px;
 }
