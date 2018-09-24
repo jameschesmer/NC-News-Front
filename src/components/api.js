@@ -43,7 +43,7 @@ export const updateVotesArticle = (props, query) => {
 }
 
 export const addNewArticle = withErrorHandling((props) => {
-  axios.post(`${DB_URL}/topics/${props.topic}/articles`, {
+  return axios.post(`${DB_URL}/topics/${props.topic}/articles`, {
     "title": `${props.title}`, "body": `${props.content}`, "created_by": `${props.user_id}`
   })
 })

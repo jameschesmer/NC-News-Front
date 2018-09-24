@@ -10,7 +10,8 @@ class NewArticle extends Component {
     content: '',
     topic: 'Coding',
     user_id: '',
-    addedArticle: false
+    addedArticle: false,
+    err: null
   }
 
   componentDidMount = async () => {
@@ -21,8 +22,9 @@ class NewArticle extends Component {
   }
 
   render() {
+
     if (this.state.addedArticle) return <Redirect to="/" />
-    return (
+    return ((this.state.err !== null) ? <Redirect to="/Page404" /> :
       <form className='NewArticleForm' onSubmit={this.handleSubmit}>
         <h1>Title</h1>
         <input type="text" value={this.state.title} onChange={this.handleTitle} />
@@ -54,10 +56,16 @@ class NewArticle extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    await api.addNewArticle(this.state);
-    this.setState({
-      addedArticle: true
-    })
+    const newArticle = await api.addNewArticle(this.state);
+    if (newArticle.status === 201) {
+      this.setState({
+        addedArticle: true
+      })
+    } else {
+      this.setState({
+        err: true
+      })
+    }
   }
 }
 
