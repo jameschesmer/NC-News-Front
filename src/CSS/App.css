@@ -11,7 +11,8 @@ nav {
 }
 
 a {
-  text-decoration: none white solid;
+  text-decoration: none;
+  color: white;
   padding: 5px;
   margin: 5px;
   align-self: center;
