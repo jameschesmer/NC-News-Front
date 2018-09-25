@@ -19,7 +19,7 @@ class Profile extends Component {
   render() {
     return (
       <div>
-        <img src={this.state.avatar} alt="Current User"></img>
+        <img src={this.state.avatar} alt="Current User" onError={(e) => { e.target.src = "https://static.boredpanda.com/blog/wp-content/uploads/2017/09/funny-dog-thoughts-tweets-1.jpg" }}></img>
         <h1>{this.state.user}</h1>
       </div>
     );

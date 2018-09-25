@@ -8,11 +8,22 @@ import Votes from './Votes';
 class Articles extends Component {
   state = {
     articles: [],
-    err: null
+    err: null,
+    topic: ''
   }
 
   componentDidMount() {
     this.retriveArticles()
+  }
+
+  componentDidUpdate() {
+    const newTopic = this.props.match.params.topic_slug
+    if (this.state.topic !== newTopic) {
+      this.retriveArticles()
+      this.setState({
+        topic: newTopic
+      })
+    }
   }
 
   retriveArticles = async () => {
@@ -30,6 +41,7 @@ class Articles extends Component {
   }
 
   render() {
+    console.log(this.props);
     return (
       (this.state.err !== null) ? <Redirect to="/Page404" /> :
         <div className='outerArticleContainer'>

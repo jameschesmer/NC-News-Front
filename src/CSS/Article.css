@@ -5,12 +5,12 @@
 }
 
 .thisArticle {
-border: solid black;
+  border: solid black;
   border-radius: 25px;
   width: 80%;
   padding: 5px;
   margin: 5px 10%;
-  background-color: rgb(200, 255, 214);
+  background-color: grey;
 }
 
 .comment {
@@ -27,17 +27,15 @@ border: solid black;
   height: 100%;
   width: 50px;
   border: black;
-  opacity: 0.2;
 }
 
 .UPVoteButton:hover{
-  opacity: 1;
+  opacity: 0.6;
 }
 
 .UPVoteButton:disabled{
   background-color: grey;
   color: black;
-  opacity: 0.5;
 }
 
 .DOWNVoteButton {
@@ -45,17 +43,15 @@ border: solid black;
   height: 100%;
   width: 50px;
   border: black;
-  opacity: 0.2;
 }
 
 .DOWNVoteButton:hover{
-  opacity: 1;
+  opacity: 0.6;
 }
 
 .DOWNVoteButton:disabled{
   background-color: grey;
   color: black;
-  opacity: 0.5;
 }
 
 .DeleteComment {
