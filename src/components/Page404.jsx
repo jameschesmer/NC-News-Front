@@ -1,13 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../CSS/Page404.css'
 
 const Page404 = () => {
   return (
     <div>
       <h1>404</h1>
-      <p>Here's be dragons! (Do battle with the dragon go back)</p>
+      <h1>Here's be dragons! (Do battle with the dragon to go back)</h1>
       <Link to='/'>
-        <img src="https://pre00.deviantart.net/13a2/th/pre/f/2012/192/3/d/fire_breathing_dragon_by_sandara-d56vmyu.jpg" alt="Dragon" /></Link>
+        <img className='dragon' src="https://vignette.wikia.nocookie.net/teenwolf-next-generation/images/f/ff/Fire-dragon-wallpaper.jpg/revision/latest/scale-to-width-down/752?cb=20160125012201" alt="Dragon" /></Link>
     </div>
   );
 };
