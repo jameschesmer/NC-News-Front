@@ -8,7 +8,7 @@ class NewArticle extends Component {
   state = {
     title: '',
     content: '',
-    topic: 'Coding',
+    topic: 'Select topic',
     user_id: '',
     addedArticle: false,
     err: null
@@ -30,6 +30,7 @@ class NewArticle extends Component {
         <input type="text" value={this.state.title} onChange={this.handleTitle} />
         <h2>Choose a topic:</h2>
         <select value={this.state.topic} onChange={this.handleChange}>
+          <option value="Select topic" defaultChecked disabled>Please Select a Topic</option>
           <option value="Coding">Coding</option>
           <option value="Football">Football</option>
           <option value="Cooking">Cooking</option>
@@ -56,15 +57,27 @@ class NewArticle extends Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const newArticle = await api.addNewArticle(this.state);
-    if (newArticle.status === 201) {
-      this.setState({
-        addedArticle: true
-      })
+    if (this.state.title !== '') {
+      if (this.state.content !== '') {
+        if (this.state.topic !== 'Select topic') {
+          const newArticle = await api.addNewArticle(this.state);
+          if (newArticle.status === 201) {
+            this.setState({
+              addedArticle: true
+            })
+          } else {
+            this.setState({
+              err: true
+            })
+          }
+        } else {
+          alert('You must choose a topic')
+        }
+      } else {
+        alert('You must have something to say')
+      }
     } else {
-      this.setState({
-        err: true
-      })
+      alert('You must have a title')
     }
   }
 }

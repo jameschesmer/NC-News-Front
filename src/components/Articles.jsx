@@ -41,7 +41,6 @@ class Articles extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       (this.state.err !== null) ? <Redirect to="/Page404" /> :
         <div className='outerArticleContainer'>

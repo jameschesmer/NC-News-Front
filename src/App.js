@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
+import moment from 'moment';
 import Articles from './components/Articles'
 import Profile from './components/Profile'
 import Article from './components/Article'
@@ -18,8 +19,9 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {this.state.currentUser !== '' ?
-          <div>
+        {(this.state.currentUser !== '' || sessionStorage.currentUser !== undefined) ?
+          < div >
+            {this.updateUserFromLocalStorage()}
             <nav className='topBar'>
               <Link to='/'>Home</Link>
               <Link to='/profile'>Profile</Link>
@@ -67,10 +69,24 @@ class App extends Component {
   }
 
   updateUser = (username, user) => {
+    sessionStorage.setItem('currentUser', `${username}`)
+    sessionStorage.setItem('user', `${user}`)
+    sessionStorage.setItem('time', `${moment().format()}`)
     this.setState({
       currentUser: username,
       user: user
     })
+  }
+
+  updateUserFromLocalStorage = () => {
+    if (this.state === '' && moment().subtract(1, 'm') < moment(sessionStorage.time)) {
+      this.setState({
+        currentUser: sessionStorage.currentUser,
+        user: sessionStorage.user
+      })
+    } else if (moment().subtract(1, 'm') > moment(sessionStorage.time)) {
+      sessionStorage.clear()
+    }
   }
 }
 

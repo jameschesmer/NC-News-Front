@@ -18,7 +18,7 @@ class Comment extends Component {
           <button disabled={this.state.changeCommentVotes !== 0} className='UPVoteButton' onClick={() => this.handleVoteClick(this.props.comment._id, 'UP')} >Up</button>
           <button disabled={this.state.changeCommentVotes !== 0} className='DOWNVoteButton' onClick={() => this.handleVoteClick(this.props.comment._id, 'DOWN')} >Down</button>
 
-          <button disabled={this.props.comment.created_by.username ? this.props.currentUser !== this.props.comment.created_by.username : false} className='DeleteArticle' onClick={() => this.props.handleDelete(this.props.comment._id)}>Delete</button>
+          <button disabled={this.props.comment.created_by.username ? this.props.currentUser !== this.props.comment.created_by.username : false} className='DeleteComment' onClick={() => this.props.handleDelete(this.props.comment._id)}>Delete</button>
         </div>
       </div>
     );
