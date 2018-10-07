@@ -8,7 +8,7 @@ Further details of the development can be found here
 
 ### Getting Started
 
-To see the project in action go https://nc-news-jc.netlify.com/ or https://nc-news-jc.herokuapp.com/
+To see the project in action go https://nc-news-jc.netlify.com/
 
 The API in use for this project is available https://github.com/jameschesmer/BE2-northcoders-news
 
