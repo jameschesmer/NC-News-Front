@@ -10,6 +10,8 @@ Further details of the development can be found here
 
 To see the project in action go https://nc-news-jc.netlify.com/
 
+The code behind this project is at https://github.com/jameschesmer/BE2-northcoders-news
+
 The API in use for this project is available https://github.com/jameschesmer/BE2-northcoders-news
 
 ### Prerequisites
