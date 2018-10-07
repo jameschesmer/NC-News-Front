@@ -12,6 +12,7 @@
   padding: 2px 2px;
   border-radius: 25px;
   min-width: 300px;
+  max-width: 300px;
   -webkit-box-shadow: 3px 6px 6px -2px rgba(0,0,0,0.38);
   -moz-box-shadow: 3px 6px 6px -2px rgba(0,0,0,0.38);
   box-shadow: 3px 6px 6px -2px rgba(0,0,0,0.38);

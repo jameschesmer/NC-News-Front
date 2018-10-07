@@ -22,7 +22,6 @@ class NewArticle extends Component {
   }
 
   render() {
-
     if (this.state.addedArticle) return <Redirect to="/" />
     return ((this.state.err !== null) ? <Redirect to="/Page404" /> :
       <form className='NewArticleForm' onSubmit={this.handleSubmit}>

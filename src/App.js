@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import moment from 'moment';
 import Articles from './components/Articles'
 import Profile from './components/Profile'
 import Article from './components/Article'
@@ -14,8 +13,6 @@ class App extends Component {
     currentUser: '',
     user: ''
   }
-  // jessjelly
-  // Jess Jelly
   render() {
     return (
       <div className="App">
@@ -71,7 +68,6 @@ class App extends Component {
   updateUser = (username, user) => {
     sessionStorage.setItem('currentUser', `${username}`)
     sessionStorage.setItem('user', `${user}`)
-    sessionStorage.setItem('time', `${moment().format()}`)
     this.setState({
       currentUser: username,
       user: user
@@ -79,13 +75,11 @@ class App extends Component {
   }
 
   updateUserFromLocalStorage = () => {
-    if (this.state === '' && moment().subtract(1, 'm') < moment(sessionStorage.time)) {
+    if (this.state === '') {
       this.setState({
         currentUser: sessionStorage.currentUser,
         user: sessionStorage.user
       })
-    } else if (moment().subtract(1, 'm') > moment(sessionStorage.time)) {
-      sessionStorage.clear()
     }
   }
 }

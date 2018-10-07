@@ -5,8 +5,13 @@
 nav {
   color: white;
   background-color: blue;
-  font-size: 30px;
+  font-size: 70%;
   height: 50px;
+}
+
+.topBar {
+  display: flex;
+  font-size: 100%;
   align-content: center;
 }
 
@@ -24,7 +29,7 @@ nav > a:visited { text-decoration: none; color:white; }
   float: right;
   overflow: hidden;
   padding: 0px 10px;
-  margin: 0px 10px;
+  margin: 5px 10px;
 }
 
 .dropdown .dropbtn {
@@ -32,7 +37,7 @@ nav > a:visited { text-decoration: none; color:white; }
   border: none;
   outline: none;
   color: white;
-  padding: 14px 16px;
+  padding: 0vh 6vh;
   background-color: inherit;
 }
 

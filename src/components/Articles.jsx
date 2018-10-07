@@ -44,13 +44,12 @@ class Articles extends Component {
     return (
       (this.state.err !== null) ? <Redirect to="/Page404" /> :
         <div className='outerArticleContainer'>
-          {/* {Object.keys((this.props.match.params)) && <h1>{Object.values((this.props.match.params))[0]}</h1>} */}
           {this.state.articles.map(article => {
             return <div className='articleContainer' key={article._id}>
               <div className='articleButton' key={article._id}  >
                 <Link to={`/articles/${article._id}`} key={article._id} >
-                  <h2>{article.title}</h2>
-                  <p>{article.belongs_to}: {article.body.slice(0, 45)}...</p>
+                  {article.title.length <= 20 ? <h2>{article.title}</h2> : <h2>{article.title.slice(0, 16)}...</h2>}
+                  {article.body.length <= 30 ? <p>{article.belongs_to}: {article.body}</p> : <p>{article.belongs_to}: {article.body.slice(0, 20)}...</p>}
                   <p>Comments: {article.comment_count}</p>
                 </Link>
                 <Votes article={article} />
