@@ -20,8 +20,8 @@ Node.js v10.6.0 or higher
 
 ### Installation
 
-git clone https://github.com/jameschesmer/FE2-NC-News
-cd ncnews
+git clone https://github.com/jameschesmer/NC-News-Front
+cd NC-News-Front
 npm install
 npm start
 
